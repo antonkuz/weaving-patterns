@@ -1,0 +1,78 @@
+.grid-config-designer {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.grid-config-designer h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.config-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.config-control {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.config-control label {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.numeric-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.numeric-control button {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.numeric-control button:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.numeric-control button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.numeric-input {
+  width: 80px;
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.numeric-input:focus {
+  outline: none;
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+.config-info {
+  font-family: monospace;
+  color: #666;
+  font-size: 14px;
+}
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weaving Patterns v2 - Pattern Designer</title>
+  
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+  
+  <!-- Component CSS -->
+  <!-- <link rel="stylesheet" href="components/binary-pattern-designer.css"> -->
+  <!-- <link rel="stylesheet" href="components/color-scheme-designer.css"> -->
+  <!-- <link rel="stylesheet" href="components/grid-config-designer.css"> -->
+  <link rel="stylesheet" href="components/applied-pattern-preview.css">
+  <!-- <link rel="stylesheet" href="components/save-export.css"> -->
+  
+  <!-- Main styles -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fafafa;
+    }
+    
+    .app-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .app-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .preview-section {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    
+    .preview-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    
+    .animation-controls {
+      margin-top: 15px;
+    }
+    
+    .btn-animate {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-animate:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .btn-animate.active {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <h1 class="app-title">Weaving Patterns v2 - Pattern Designer</h1>
+    
+    <!-- Step 1: Binary Pattern Designer -->
+    <!-- <div id="binary-pattern-designer"></div> -->
+    
+    <!-- Step 2: Color Scheme Designer -->
+    <!-- <div id="color-scheme-designer"></div> -->
+    
+    <!-- Step 3: Grid Configuration -->
+    <!-- <div id="grid-config-designer"></div> -->
+    
+    <!-- Preview: Applied Pattern -->
+    <div class="preview-section">
+      <h3>Preview: Applied Pattern</h3>
+      <div id="applied-pattern-preview"></div>
+      <div class="animation-controls">
+        <button id="btn-animate" class="btn-animate">Start Animation</button>
+      </div>
+    </div>
+    
+    <!-- Export -->
+    <!-- <div id="save-export"></div> -->
+  </div>
+  
+  <!-- Component JavaScript files -->
+  <!-- <script src="components/BinaryPatternDesigner.js"></script> -->
+  <!-- <script src="components/ColorSchemeDesigner.js"></script> -->
+  <!-- <script src="components/GridConfigDesigner.js"></script> -->
+  <script src="components/AppliedPatternPreview.js"></script>
+  <!-- <script src="components/SaveExport.js"></script> -->
+  
+  <!-- Main application script -->
+  <!-- <script src="app.js"></script> -->
+  
+  <!-- Standalone test script for AppliedPatternPreview only -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const preview = new AppliedPatternPreview(
+        'applied-pattern-preview',
+        () => {
+          console.log('Preview ready');
+          // Set some test data
+          preview.setBinaryPattern([0, 1, 0, 1]);
+          preview.setColorScheme({ 0: '#000000', 1: '#FFFFFF' });
+          preview.setGridConfig({ width: 8, height: 8, cellSize: 50 });
+        }
+      );
+      
+      // Set up animation button for testing
+      const animateButton = document.getElementById('btn-animate');
+      let isAnimating = false;
+      let animationProgress = 0;
+      let animationInterval = null;
+      
+      if (animateButton) {
+        animateButton.addEventListener('click', () => {
+          isAnimating = !isAnimating;
+          animateButton.textContent = isAnimating ? 'Stop Animation' : 'Start Animation';
+          animateButton.classList.toggle('active', isAnimating);
+          
+          if (isAnimating) {
+            animationProgress = 0;
+            const maxCells = 8 * 8; // width * height
+            animationInterval = setInterval(() => {
+              animationProgress++;
+              preview.setAnimationProgress(animationProgress);
+              preview.setIsAnimating(true);
+              
+              if (animationProgress >= maxCells) {
+                clearInterval(animationInterval);
+                isAnimating = false;
+                animateButton.textContent = 'Start Animation';
+                animateButton.classList.remove('active');
+                preview.setIsAnimating(false);
+              }
+            }, 100);
+          } else {
+            if (animationInterval) {
+              clearInterval(animationInterval);
+            }
+            preview.setIsAnimating(false);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+

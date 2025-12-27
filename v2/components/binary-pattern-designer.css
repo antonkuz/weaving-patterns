@@ -1,0 +1,82 @@
+  .binary-pattern-designer {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.binary-pattern-designer h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.pattern-squares-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.pattern-square {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all 0.2s;
+}
+
+.pattern-square:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.pattern-square[data-value="0"] {
+  background-color: #f0f0f0;
+  color: #666;
+}
+
+.pattern-square[data-value="1"] {
+  background-color: #333;
+  color: #fff;
+}
+
+.pattern-square:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pattern-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.pattern-controls button {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pattern-controls button:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.pattern-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pattern-info {
+  font-family: monospace;
+  color: #666;
+  font-size: 14px;
+}
+
