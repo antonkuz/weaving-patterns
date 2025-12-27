@@ -7,7 +7,8 @@
   border-radius: 4px;
 }
 
-#p5-sketch-container {
-  display: inline-block;
+#applied-pattern-preview canvas {
+  display: block;
+  image-rendering: pixelated;
 }
 

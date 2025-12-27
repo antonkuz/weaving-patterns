@@ -12,7 +12,7 @@ v2/
 │   ├── BinaryPatternDesigner.js    # Step 1: Binary pattern input
 │   ├── ColorSchemeDesigner.js      # Step 2: Color palette selection
 │   ├── GridConfigDesigner.js       # Step 3: Grid configuration
-│   ├── AppliedPatternPreview.js    # Preview: p5.js rendering
+│   ├── AppliedPatternPreview.js    # Preview: Canvas 2D rendering
 │   ├── SaveExport.js               # Export: JSON serialization
 │   └── *.css                      # Component styles
 └── utils/                       # (Empty for now)
@@ -41,7 +41,7 @@ v2/
 - +/- buttons and direct input
 
 ✅ **AppliedPatternPreview**
-- p5.js instance mode rendering
+- Canvas 2D rendering (no p5 dependency)
 - Real-time updates as configuration changes
 - Grid visualization with pattern repetition
 
