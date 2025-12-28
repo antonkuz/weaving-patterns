@@ -1,43 +1,45 @@
 .grid-config-designer {
-  padding: 20px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 20px;
+  background-color: #fff;
 }
 
 .grid-config-designer h3 {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .config-controls {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .config-control {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
 }
 
 .config-control label {
-  min-width: 120px;
+  min-width: 80px;
   font-weight: 500;
+  font-size: 13px;
 }
 
 .numeric-control {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .numeric-control button {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
   font-weight: bold;
   border: 1px solid #333;
   border-radius: 4px;
@@ -55,24 +57,92 @@
   cursor: not-allowed;
 }
 
-.numeric-input {
-  width: 80px;
-  padding: 8px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #333;
-  border-radius: 4px;
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 200px;
 }
 
-.numeric-input:focus {
+.numeric-slider {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #ddd;
   outline: none;
-  border-color: #666;
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.numeric-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.numeric-slider::-webkit-slider-thumb:hover {
+  background: #555;
+}
+
+.numeric-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.numeric-slider::-moz-range-thumb:hover {
+  background: #555;
+}
+
+.slider-value {
+  min-width: 35px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.btn-preset {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-preset:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-preset:active {
+  background-color: #e0e0e0;
 }
 
 .config-info {
   font-family: monospace;
   color: #666;
-  font-size: 14px;
+  font-size: 11px;
+  margin: 0;
 }
 

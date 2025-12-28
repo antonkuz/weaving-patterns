@@ -21,22 +21,22 @@ class ColorSchemeDesigner {
       {
         id: 'bw',
         name: 'Black & White',
-        colors: { 0: '#000000', 1: '#FFFFFF' }
+        colors: { 0: '#FFFFFF', 1: '#000000' }
       },
       {
         id: 'orange-red',
         name: 'Red-Orange',
-        colors: { 0: '#8C3363', 1: '#F27821' }
+        colors: { 0: '#F27821', 1: '#8C3363' }
       },
       {
         id: 'blue-white',
         name: 'Blue & White',
-        colors: { 0: '#4169E1', 1: '#FFFFFF' }
+        colors: { 0: '#FFFFFF', 1: '#4169E1' }
       },
       {
         id: 'teal-white',
         name: 'Teal & White',
-        colors: { 0: '#5F9EA0', 1: '#FFFFFF' }
+        colors: { 0: '#FFFFFF', 1: '#5F9EA0' }
       }
     ];
     
@@ -54,7 +54,7 @@ class ColorSchemeDesigner {
         this.selectedPaletteId = this.palettes[0].id;
       }
     } else {
-      this.selectedPaletteId = this.palettes[0].id;
+      this.selectedPaletteId = 'orange-red';
     }
     
     this.init();
@@ -66,10 +66,6 @@ class ColorSchemeDesigner {
       // Check normal
       if (palette.colors[0] === scheme[0] && palette.colors[1] === scheme[1]) {
         return { paletteId: palette.id, inverted: false };
-      }
-      // Check inverted
-      if (palette.colors[0] === scheme[1] && palette.colors[1] === scheme[0]) {
-        return { paletteId: palette.id, inverted: true };
       }
     }
     return null;
@@ -92,8 +88,8 @@ class ColorSchemeDesigner {
       return `
         <div class="palette-option ${isSelected ? 'selected' : ''}" data-palette-id="${palette.id}">
           <div class="palette-swatches">
-            <div class="color-swatch" style="background-color: ${palette.colors[0]}"></div>
             <div class="color-swatch" style="background-color: ${palette.colors[1]}"></div>
+            <div class="color-swatch" style="background-color: ${palette.colors[0]}"></div>
           </div>
           <div class="palette-name">${palette.name}</div>
           ${isSelected ? '<div class="checkmark">✓</div>' : ''}

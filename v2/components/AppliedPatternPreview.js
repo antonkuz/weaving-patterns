@@ -14,9 +14,9 @@ class AppliedPatternPreview {
     this.onReady = onReady;
     
     // State
-    this.binaryPattern = [0, 1, 0, 1];
-    this.colorScheme = { 0: '#FFFFFF', 1: '#000000' };
-    this.gridConfig = { width: 7, height: 8, cellSize: 50 };
+    this.binaryPattern = [1, 1, 0, 1, 1, 1, 0];
+    this.colorScheme = { 0: '#F27821', 1: '#8C3363' };
+    this.gridConfig = { width: 7, height: 1, cellSize: 50 };
     this.animationProgress = 0;
     this.isAnimating = false;
     
@@ -110,22 +110,6 @@ class AppliedPatternPreview {
       const y = row * this.gridConfig.cellSize;
       ctx.fillRect(x, y, this.gridConfig.cellSize, this.gridConfig.cellSize);
     }
-    
-    // Draw grid lines (optional, subtle)
-    ctx.strokeStyle = 'rgb(220, 220, 220)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    for (let row = 0; row <= this.gridConfig.height; row++) {
-      const y = row * this.gridConfig.cellSize + 0.5;
-      ctx.moveTo(0, y);
-      ctx.lineTo(width, y);
-    }
-    for (let col = 0; col <= this.gridConfig.width; col++) {
-      const x = col * this.gridConfig.cellSize + 0.5;
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, height);
-    }
-    ctx.stroke();
   }
   
   update() {

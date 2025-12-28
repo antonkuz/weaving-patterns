@@ -11,20 +11,21 @@
  */
 
 class GridConfigDesigner {
-  constructor(containerId, initialConfig = null, onGridConfigChange = null) {
+  constructor(containerId, initialConfig = null, onGridConfigChange = null, getBinaryPatternLength = null) {
     this.containerId = containerId;
     this.onGridConfigChange = onGridConfigChange;
+    this.getBinaryPatternLength = getBinaryPatternLength;
     
     // Default configuration
     this.config = initialConfig || {
-      width: 8,
-      height: 8,
-      cellSize: 5
+      width: 7,
+      height: 1,
+      cellSize: 50
     };
     
     this.limits = {
       width: { min: 4, max: 32 },
-      height: { min: 4, max: 32 },
+      height: { min: 1, max: 32 },
       cellSize: { min: 1, max: 50 }
     };
     
@@ -55,6 +56,10 @@ class GridConfigDesigner {
           ${heightControl}
           ${cellSizeControl}
         </div>
+        <div class="preset-buttons">
+          <button class="btn-preset" data-preset="minimal">Minimal View</button>
+          <button class="btn-preset" data-preset="25x25">25×25</button>
+        </div>
         <div class="config-info">
           Grid: ${this.config.width} × ${this.config.height} cells, 
           ${this.config.cellSize}px each
@@ -74,14 +79,17 @@ class GridConfigDesigner {
         <label>${label}:</label>
         <div class="numeric-control">
           <button class="btn-decrement" data-key="${key}" ${!canDecrement ? 'disabled' : ''}>-</button>
-          <input 
-            type="number" 
-            class="numeric-input" 
-            data-key="${key}"
-            value="${value}" 
-            min="${limit.min}" 
-            max="${limit.max}"
-          />
+          <div class="slider-container">
+            <input 
+              type="range" 
+              class="numeric-slider" 
+              data-key="${key}"
+              value="${value}" 
+              min="${limit.min}" 
+              max="${limit.max}"
+            />
+            <span class="slider-value" data-key="${key}">${value}</span>
+          </div>
           <button class="btn-increment" data-key="${key}" ${!canIncrement ? 'disabled' : ''}>+</button>
         </div>
       </div>
@@ -107,23 +115,62 @@ class GridConfigDesigner {
       });
     });
     
-    // Handle direct input changes
-    container.querySelectorAll('.numeric-input').forEach(input => {
-      input.addEventListener('change', (e) => {
+    // Handle slider changes
+    container.querySelectorAll('.numeric-slider').forEach(slider => {
+      slider.addEventListener('input', (e) => {
+        const key = e.target.dataset.key;
+        const value = parseInt(e.target.value);
+        if (!isNaN(value)) {
+          // Update value and trigger callback without full re-render
+          const limit = this.limits[key];
+          const clampedValue = Math.max(limit.min, Math.min(limit.max, value));
+          
+          if (this.config[key] !== clampedValue) {
+            this.config[key] = clampedValue;
+            // Update the displayed value
+            const valueDisplay = container.querySelector(`.slider-value[data-key="${key}"]`);
+            if (valueDisplay) {
+              valueDisplay.textContent = clampedValue;
+            }
+            // Trigger callback to update preview
+            if (this.onGridConfigChange) {
+              this.onGridConfigChange({ ...this.config });
+            }
+          }
+        }
+      });
+      
+      slider.addEventListener('change', (e) => {
         const key = e.target.dataset.key;
         const value = parseInt(e.target.value);
         this.setValue(key, value);
       });
-      
-      // Also handle input event for real-time updates (optional)
-      input.addEventListener('input', (e) => {
-        const key = e.target.dataset.key;
-        const value = parseInt(e.target.value);
-        if (!isNaN(value)) {
-          this.setValue(key, value, false); // Don't update UI yet, just validate
-        }
+    });
+    
+    // Handle preset buttons
+    container.querySelectorAll('.btn-preset').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const preset = e.target.dataset.preset;
+        this.applyPreset(preset);
       });
     });
+  }
+  
+  applyPreset(preset) {
+    if (preset === 'minimal') {
+      const patternLength = this.getBinaryPatternLength ? this.getBinaryPatternLength() : 7;
+      this.setConfig({
+        width: patternLength,
+        height: 1,
+        cellSize: 50
+      });
+    } else if (preset === '25x25') {
+      this.setConfig({
+        width: 25,
+        height: 25,
+        cellSize: 15
+      });
+    }
   }
   
   increment(key) {
@@ -150,10 +197,15 @@ class GridConfigDesigner {
       if (updateUI) {
         this.update();
       } else {
-        // Just update the input value without full re-render
-        const input = document.querySelector(`.numeric-input[data-key="${key}"]`);
-        if (input) {
-          input.value = clampedValue;
+        // Just update the slider and value display without full re-render
+        const container = document.getElementById(this.containerId);
+        const slider = container.querySelector(`.numeric-slider[data-key="${key}"]`);
+        const valueDisplay = container.querySelector(`.slider-value[data-key="${key}"]`);
+        if (slider) {
+          slider.value = clampedValue;
+        }
+        if (valueDisplay) {
+          valueDisplay.textContent = clampedValue;
         }
       }
     }

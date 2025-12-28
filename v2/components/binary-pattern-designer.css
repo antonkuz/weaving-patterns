@@ -1,26 +1,27 @@
-  .binary-pattern-designer {
-  padding: 20px;
+.binary-pattern-designer {
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 20px;
+  background-color: #fff;
 }
 
 .binary-pattern-designer h3 {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .pattern-squares-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 6px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
 .pattern-square {
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
   font-weight: bold;
   border: 2px solid #333;
   border-radius: 4px;
@@ -30,8 +31,8 @@
 }
 
 .pattern-square:hover {
-  transform: scale(1.1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .pattern-square[data-value="0"] {
@@ -51,13 +52,13 @@
 
 .pattern-controls {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 .pattern-controls button {
-  padding: 8px 16px;
-  font-size: 16px;
+  padding: 6px 12px;
+  font-size: 13px;
   border: 1px solid #333;
   border-radius: 4px;
   background-color: #fff;
@@ -74,9 +75,38 @@
   cursor: not-allowed;
 }
 
+.preset-buttons {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.btn-preset {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-preset:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-preset:active {
+  background-color: #e0e0e0;
+}
+
 .pattern-info {
   font-family: monospace;
   color: #666;
-  font-size: 14px;
+  font-size: 11px;
+  margin: 0;
 }
 

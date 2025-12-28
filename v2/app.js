@@ -6,9 +6,9 @@
 
 // Application state
 const appState = {
-  binaryPattern: [0, 1, 0, 1],
-  colorScheme: { 0: '#FFFFFF', 1: '#000000' },
-  gridConfig: { width: 8, height: 8, cellSize: 50 },
+  binaryPattern: [1, 1, 0, 1, 1, 1, 0],
+  colorScheme: { 0: '#F27821', 1: '#8C3363' },
+  gridConfig: { width: 7, height: 1, cellSize: 50 },
   isAnimating: false,
   animationProgress: 0,
   animationInterval: null
@@ -55,7 +55,8 @@ function initializeComponents() {
     (config) => {
       appState.gridConfig = config;
       updatePreview();
-    }
+    },
+    () => appState.binaryPattern.length
   );
   
   // Initialize AppliedPatternPreview

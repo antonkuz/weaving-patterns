@@ -11,12 +11,20 @@
  */
 
 class BinaryPatternDesigner {
-  constructor(containerId, initialPattern = [0, 1, 0, 1], onPatternChange = null) {
+  constructor(containerId, initialPattern = [1, 1, 0, 1, 1, 1, 0], onPatternChange = null) {
     this.containerId = containerId;
     this.pattern = [...initialPattern]; // Clone to avoid mutation
     this.onPatternChange = onPatternChange;
     this.minLength = 2;
     this.maxLength = 16;
+    
+    // Preset patterns
+    this.presets = {
+      '2/1+3/2': [1, 1, 0, 1, 1, 1, 0, 0],
+      'paradiddle+return': [1, 0, 1, 1, 0, 1, 0, 0],
+      '(1/1)*2+paradiddle': [1, 0, 1, 0, 1, 0, 1, 1],
+      'double paradiddle': [1, 0, 1, 0, 1, 1]
+    };
     
     this.init();
   }
@@ -52,6 +60,12 @@ class BinaryPatternDesigner {
           <button class="btn-add" ${!canAdd ? 'disabled' : ''}>+ Add</button>
           <button class="btn-delete" ${!canDelete ? 'disabled' : ''}>- Delete Last</button>
         </div>
+        <div class="preset-buttons">
+          <button class="btn-preset" data-preset="2/1+3/2">2/1+3/2</button>
+          <button class="btn-preset" data-preset="paradiddle+return">Paradiddle+Return</button>
+          <button class="btn-preset" data-preset="(1/1)*2+paradiddle">(1/1)*2+Paradiddle</button>
+          <button class="btn-preset" data-preset="double paradiddle">Double Paradiddle</button>
+        </div>
         <div class="pattern-info">
           Pattern: [${this.pattern.join(', ')}] (${this.pattern.length} squares)
         </div>
@@ -81,6 +95,25 @@ class BinaryPatternDesigner {
       deleteBtn.addEventListener('click', () => {
         this.deleteLastSquare();
       });
+    }
+    
+    // Handle preset buttons
+    container.querySelectorAll('.btn-preset').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const preset = e.target.dataset.preset;
+        this.applyPreset(preset);
+      });
+    });
+  }
+  
+  applyPreset(presetName) {
+    const presetPattern = this.presets[presetName];
+    if (presetPattern) {
+      this.setPattern(presetPattern);
+      // Ensure callback is triggered for preview refresh
+      if (this.onPatternChange) {
+        this.onPatternChange([...this.pattern]);
+      }
     }
   }
   

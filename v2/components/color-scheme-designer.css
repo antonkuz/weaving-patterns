@@ -1,19 +1,20 @@
 .color-scheme-designer {
-  padding: 20px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 20px;
+  background-color: #fff;
 }
 
 .color-scheme-designer h3 {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 .palettes-grid {
   display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
@@ -21,19 +22,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 8px;
   border: 2px solid #ddd;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
-  min-width: 120px;
+  min-width: 80px;
 }
 
 .palette-option:hover {
   border-color: #999;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .palette-option.selected {
@@ -43,43 +44,43 @@
 
 .palette-swatches {
   display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 6px;
+  margin-bottom: 6px;
 }
 
 .color-swatch {
-  width: 50px;
-  height: 50px;
+  width: 32px;
+  height: 32px;
   border: 2px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .palette-name {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   text-align: center;
 }
 
 .checkmark {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 3px;
+  right: 3px;
   background-color: #333;
   color: #fff;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .inverse-control {
-  margin: 15px 0;
-  padding: 10px;
+  margin: 10px 0;
+  padding: 8px;
   background-color: #f9f9f9;
   border-radius: 4px;
 }
@@ -87,21 +88,22 @@
 .inverse-control label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .inverse-checkbox {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
 .scheme-info {
   font-family: monospace;
   color: #666;
-  font-size: 14px;
-  margin-top: 10px;
+  font-size: 11px;
+  margin-top: 8px;
+  margin-bottom: 0;
 }
 
