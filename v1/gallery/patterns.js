@@ -6,7 +6,7 @@
 const PATTERNS = [
   {
     name: "2/2",
-    pattern: [1, 1, 0, 0]
+    pattern: [1,1,0,0]
   },
   {
     name: "1/3",
@@ -14,35 +14,43 @@ const PATTERNS = [
   },
   {
     name: "2/1+3/2",
-    pattern: [1, 1, 0, 1, 1, 1, 0, 0]
+    pattern: [1,1,0,1,1,1,0,0]
   },
   {
     name: "1/3+2/2",
-    pattern: [1, 0, 0, 0, 1, 1, 0, 0]
+    pattern: [1,0,0,0,1,1,0,0]
   },
   {
     name: "paradiddle+return",
     pattern: [1,0,1,1,0,1,0,0]
   },
   {
-    name: "double paradiddle + return",
+    name: "1/1+2/1+1/1",
+    pattern: [1,0,1,1,0,1,0]
+  },
+  {
+    name: "double paradiddle+return",
     pattern: [1,0,1,0,1,0,1,1,0,1,0,1,0,1,0,0]
   },
   {
-    name: "(1/1)*2 + 2/2",
+    name: "1/1+1/1+2/2",
     pattern: [1,0,1,0,1,1,0,0]
   },
   {
-    name: "(1/1)*2 + paradiddle",
+    name: "1/1+1/1+2/1",
+    pattern: [1,0,1,0,1,1,0]
+  },
+  {
+    name: "1/1+1/1+paradiddle",
     pattern: [1,0,1,0,1,0,1,1]
   },
   {
-    name: "3/1 + 3/1 + 1/1",
+    name: "3/1+3/1+1/1",
     pattern: [1,1,1,0,1,1,1,0,1,0]
   },
   {
     name: "3/3",
-    pattern: [1, 1, 1, 0, 0, 0]
+    pattern: [1,1,1,0,0,0]
   },
   {
     name: "1/2",
@@ -81,7 +89,7 @@ const PATTERNS = [
     pattern: [1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0,1,0,1,1,0,1,1,0,1,1,0]
   },
   {
-    name: "1/2,1/2,/1/1",
+    name: "1/2+1/2+1/1",
     pattern: [1,0,0,1,0,0,1,0]
   },
   {

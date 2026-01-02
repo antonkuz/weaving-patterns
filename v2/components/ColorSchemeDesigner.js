@@ -37,6 +37,11 @@ class ColorSchemeDesigner {
         id: 'teal-white',
         name: 'Teal & White',
         colors: { 0: '#FFFFFF', 1: '#5F9EA0' }
+      },
+      {
+        id: 'green-black',
+        name: 'Green & Black',
+        colors: { 0: '#000000', 1: '#00FF00' }
       }
     ];
     

@@ -88,6 +88,10 @@ class SaveExport {
         width: 8,
         height: 8,
         cellSize: 50
+      },
+      animation: {
+        direction: null,
+        speed: 5
       }
     };
   }

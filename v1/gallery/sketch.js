@@ -79,14 +79,14 @@ class Pattern {
             fill(inverted ? 140 : 242, inverted ? 51 : 120, inverted ? 99 : 33);
           }
         } else {
-          // Default black/white color scheme
-          let fillColor;
+          // Sepia color scheme: sepia background, faded black for pattern
           if (cellValue === 1) {
-            fillColor = inverted ? 255 : 0; // Black for warp up (or white if inverted)
+            // Slightly faded black for pattern cells
+            fill(inverted ? 238 : 60, inverted ? 203 : 60, inverted ? 173 : 60);
           } else {
-            fillColor = inverted ? 0 : 255; // White for weft up (or black if inverted)
+            // Sepia color (same as background) for 0 cells
+            fill(inverted ? 60 : 238, inverted ? 60 : 203, inverted ? 60 : 173);
           }
-          fill(fillColor);
         }
         
         // // Set faded gray borders
@@ -252,13 +252,13 @@ class Gallery {
     // Update animation offset based on mode (every 200ms)
     if (this.animationMode === 'right') {
       let currentTime = millis();
-      if (currentTime - this.lastAnimationTime >= 200) {
+      if (currentTime - this.lastAnimationTime >= 500) {
         this.animationOffset++;
         this.lastAnimationTime = currentTime;
       }
     } else if (this.animationMode === 'left') {
       let currentTime = millis();
-      if (currentTime - this.lastAnimationTime >= 200) {
+      if (currentTime - this.lastAnimationTime >= 500) {
         this.animationOffset--;
         this.lastAnimationTime = currentTime;
       }

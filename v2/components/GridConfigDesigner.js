@@ -52,13 +52,16 @@ class GridConfigDesigner {
       <div class="grid-config-designer">
         <h3>Step 3: Grid Configuration</h3>
         <div class="config-controls">
+          <div class="config-control preset-control">
+            <label>Presets:</label>
+            <div class="preset-buttons">
+              <button class="btn-preset" data-preset="minimal">Minimal View</button>
+              <button class="btn-preset" data-preset="25x25">25×25</button>
+            </div>
+          </div>
           ${widthControl}
           ${heightControl}
           ${cellSizeControl}
-        </div>
-        <div class="preset-buttons">
-          <button class="btn-preset" data-preset="minimal">Minimal View</button>
-          <button class="btn-preset" data-preset="25x25">25×25</button>
         </div>
         <div class="config-info">
           Grid: ${this.config.width} × ${this.config.height} cells, 

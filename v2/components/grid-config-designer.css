@@ -111,13 +111,19 @@
   color: #333;
 }
 
+.preset-control {
+  align-items: flex-start;
+}
+
+.preset-control label {
+  padding-top: 4px;
+}
+
 .preset-buttons {
   display: flex;
   gap: 6px;
-  margin-bottom: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #eee;
   flex-wrap: wrap;
+  flex: 1;
 }
 
 .btn-preset {

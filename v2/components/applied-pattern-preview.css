@@ -9,10 +9,132 @@
   min-height: 200px;
 }
 
+.preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
 #applied-pattern-preview canvas {
   display: block;
   image-rendering: pixelated;
   max-width: 100%;
   height: auto;
+}
+
+/* Animation Controls */
+.animation-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  width: 100%;
+}
+
+.direction-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.direction-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.dir-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.dir-btn:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.dir-btn.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.dir-btn.active:hover {
+  background-color: #555;
+}
+
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.speed-control label {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 50px;
+}
+
+.speed-slider {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #ddd;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.speed-slider::-webkit-slider-thumb:hover {
+  background: #555;
+}
+
+.speed-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.speed-slider::-moz-range-thumb:hover {
+  background: #555;
+}
+
+.speed-value {
+  min-width: 80px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  font-family: monospace;
 }
 
