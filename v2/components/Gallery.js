@@ -65,13 +65,13 @@ class Gallery {
     const tiles = Array.from(grid.querySelectorAll('.pattern-tile'));
     if (tiles.length === 0) return;
     
-    // Get computed gap from CSS
-    const gap = 20;
+    // No gap - tiles touch each other
+    const gap = 0;
     
     // Calculate number of columns based on container width
     const containerWidth = grid.offsetWidth;
     const tileWidth = tiles[0].offsetWidth || 250;
-    const numColumns = Math.max(1, Math.floor((containerWidth + gap) / (tileWidth + gap)));
+    const numColumns = Math.max(1, Math.floor(containerWidth / tileWidth));
     
     // Initialize column heights
     const columnHeights = new Array(numColumns).fill(0);
@@ -85,7 +85,7 @@ class Gallery {
       const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
       
       // Calculate position
-      const left = shortestColumnIndex * (tileWidth + gap);
+      const left = shortestColumnIndex * tileWidth;
       const top = columnHeights[shortestColumnIndex];
       
       // Position tile
@@ -94,22 +94,20 @@ class Gallery {
       
       // Update column height (use actual rendered height)
       const tileHeight = tile.offsetHeight || tile.getBoundingClientRect().height;
-      columnHeights[shortestColumnIndex] += tileHeight + gap;
+      columnHeights[shortestColumnIndex] += tileHeight;
     });
     
     // Set container height to accommodate all tiles
     const maxHeight = Math.max(...columnHeights);
-    grid.style.height = `${maxHeight - gap}px`; // Subtract last gap
+    grid.style.height = `${maxHeight}px`;
   }
   
   renderTile(pattern, index) {
-    const patternName = this.getPatternName(pattern.binaryPattern);
     const containerId = `pattern-tile-${index}`;
     
     return `
       <div class="pattern-tile">
         <div class="tile-preview" id="${containerId}"></div>
-        <div class="tile-name">${patternName}</div>
       </div>
     `;
   }

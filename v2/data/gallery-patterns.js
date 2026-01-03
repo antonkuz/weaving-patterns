@@ -91,6 +91,42 @@ const GALLERY_PATTERNS = [
       direction: "right",
       speed: 4
     }
+  },
+  {
+    binaryPattern: [1, 0, 0, 0],
+    colorScheme: { 0: '#FF4500', 1: '#0000CD' },
+    gridConfig: { width: 17, height: 17, cellSize: 21 },
+    animation: {
+      direction: "left",
+      speed: 8
+    }
+  },
+  {
+    binaryPattern: [1, 0, 0, 0, 1, 1, 0, 0],
+    colorScheme: { 0: '#FF00FF', 1: '#FFFF00' },
+    gridConfig: { width: 23, height: 23, cellSize: 16 },
+    animation: {
+      direction: "down",
+      speed: 5
+    }
+  },
+  {
+    binaryPattern: [1, 0, 1, 0, 1, 0, 1, 0, 0],
+    colorScheme: { 0: '#00FF00', 1: '#FF00FF' },
+    gridConfig: { width: 20, height: 20, cellSize: 19 },
+    animation: {
+      direction: "up",
+      speed: 6
+    }
+  },
+  {
+    binaryPattern: [1, 0, 1, 0, 1, 0],
+    colorScheme: { 0: '#FF6347', 1: '#00CED1' },
+    gridConfig: { width: 26, height: 26, cellSize: 14 },
+    animation: {
+      direction: "right",
+      speed: 7
+    }
   }
 ];
 
