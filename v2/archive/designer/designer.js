@@ -1,7 +1,7 @@
 /**
- * Main Application Script
+ * Designer Application Script
  * 
- * Wires together all components and manages shared state
+ * Wires together all components and manages shared state for the pattern designer
  */
 
 // Application state

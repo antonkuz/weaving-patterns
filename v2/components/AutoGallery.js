@@ -28,6 +28,7 @@ class AutoGallery {
     this.resizeTimeout = null;
     this.grid = null;
     this.animationsEnabled = true; // Global animation toggle state
+    this.blackWhiteMode = false; // Black/white color scheme toggle state
     
     this.init();
     this.setupResizeHandler();
@@ -49,14 +50,22 @@ class AutoGallery {
   
   setupKeyboardShortcuts() {
     window.addEventListener('keydown', (e) => {
+      // Only handle if not typing in an input field
+      const target = e.target;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
+      
       // Press 'A' key to toggle animations (case-insensitive)
       if (e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.metaKey && !e.altKey) {
-        // Only toggle if not typing in an input field
-        const target = e.target;
-        if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
-          e.preventDefault();
-          this.toggleAnimations();
-        }
+        e.preventDefault();
+        this.toggleAnimations();
+      }
+      
+      // Press 'B' key to toggle black/white color scheme (case-insensitive)
+      if (e.key.toLowerCase() === 'b' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        this.toggleBlackWhite();
       }
     });
   }
@@ -80,6 +89,29 @@ class AutoGallery {
         preview.stopAnimation();
       });
       console.log('Animations disabled (press A to enable)');
+    }
+  }
+  
+  toggleBlackWhite() {
+    this.blackWhiteMode = !this.blackWhiteMode;
+    
+    const blackWhiteScheme = { 0: '#FFFFFF', 1: '#000000' };
+    
+    if (this.blackWhiteMode) {
+      // Apply black/white color scheme to all tiles
+      this.previewInstances.forEach(preview => {
+        preview.setColorScheme(blackWhiteScheme);
+      });
+      console.log('Black/white mode enabled (press B to disable)');
+    } else {
+      // Restore original color schemes from pattern data
+      this.previewInstances.forEach((preview, index) => {
+        const pattern = this.generatedPatterns[index];
+        if (pattern && pattern.colorScheme) {
+          preview.setColorScheme(pattern.colorScheme);
+        }
+      });
+      console.log('Black/white mode disabled (press B to enable)');
     }
   }
   
@@ -186,7 +218,11 @@ class AutoGallery {
       
       // Configure pattern data
       preview.setBinaryPattern(pattern.binaryPattern);
-      preview.setColorScheme(pattern.colorScheme);
+      // Apply black/white scheme if mode is enabled, otherwise use original
+      const colorScheme = this.blackWhiteMode 
+        ? { 0: '#FFFFFF', 1: '#000000' }
+        : pattern.colorScheme;
+      preview.setColorScheme(colorScheme);
       preview.setGridConfig(pattern.gridConfig);
       
       // Configure animation (only if animations are enabled)
@@ -224,8 +260,8 @@ class AutoGallery {
     const firstTile = tiles[0];
     const baseTileWidth = firstTile.offsetWidth || firstTile.getBoundingClientRect().width || 250;
     
-    // Calculate number of columns that can fit
-    const numColumns = Math.max(1, Math.floor(containerWidth / baseTileWidth));
+    // Calculate number of columns that can fit (minimum 2 for mobile)
+    const numColumns = Math.max(2, Math.floor(containerWidth / baseTileWidth));
     
     // Calculate actual tile width to fill container exactly (no gaps)
     const actualTileWidth = containerWidth / numColumns;
