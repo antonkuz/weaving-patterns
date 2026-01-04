@@ -20,7 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
     loadBatchSize: 8,
     scrollThreshold: 200
   });
+  
+  // Setup animation control button
+  setupAnimationControlButton();
 });
+
+function setupAnimationControlButton() {
+  const btn = document.getElementById('animation-control-btn');
+  const icon = document.getElementById('animation-control-icon');
+  
+  if (!btn || !icon) return;
+  
+  // Update icon based on current animation state
+  function updateButtonIcon() {
+    if (autoGallery.animationsEnabled) {
+      icon.src = 'assets/pause.png';
+      icon.alt = 'Pause';
+    } else {
+      icon.src = 'assets/play.png';
+      icon.alt = 'Play';
+    }
+  }
+  
+  // Initial state (animations start enabled)
+  updateButtonIcon();
+  
+  // Handle button click
+  btn.addEventListener('click', () => {
+    if (autoGallery) {
+      autoGallery.toggleAnimations();
+      updateButtonIcon();
+    }
+  });
+}
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
