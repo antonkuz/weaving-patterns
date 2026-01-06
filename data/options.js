@@ -95,15 +95,15 @@ const OPTIONS = {
   animations: [
     { direction: "down", speed: 5 },
     { direction: "right", speed: 3 },
-    { direction: "up", speed: 9 },
+    { direction: "up", speed: 8 },
     { direction: "left", speed: 4 },
     { direction: "down", speed: 7 },
     { direction: "right", speed: 6 },
-    { direction: "up", speed: 8 },
+    { direction: "up", speed: 7 },
     { direction: "left", speed: 5 },
     { direction: "down", speed: 6 },
     { direction: "right", speed: 4 },
-    { direction: "left", speed: 8 },
+    { direction: "left", speed: 7 },
     { direction: "down", speed: 5 },
     { direction: "up", speed: 6 },
     { direction: "right", speed: 7 }

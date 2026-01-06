@@ -36,6 +36,9 @@ class AppliedPatternPreview {
     // Controls visibility (default true for backward compatibility)
     this.showControls = options.showControls !== undefined ? options.showControls : true;
     
+    // Size reduction factor (e.g., 0.5 to halve cell sizes)
+    this.reduceFactor = options.reduceFactor !== undefined ? options.reduceFactor : 1;
+    
     this.init();
   }
   
@@ -168,8 +171,9 @@ class AppliedPatternPreview {
   resizeCanvasToGrid() {
     if (!this.canvas || !this.ctx) return;
 
-    const width = this.gridConfig.width * this.gridConfig.cellSize;
-    const height = this.gridConfig.height * this.gridConfig.cellSize;
+    const effectiveCellSize = this.gridConfig.cellSize * this.reduceFactor;
+    const width = this.gridConfig.width * effectiveCellSize;
+    const height = this.gridConfig.height * effectiveCellSize;
 
     // Handle high-DPI displays for crisp lines
     this.dpr = typeof window !== 'undefined' && window.devicePixelRatio ? window.devicePixelRatio : 1;
@@ -187,8 +191,9 @@ class AppliedPatternPreview {
     if (!this.canvas || !this.ctx) return;
 
     const ctx = this.ctx;
-    const width = this.gridConfig.width * this.gridConfig.cellSize;
-    const height = this.gridConfig.height * this.gridConfig.cellSize;
+    const effectiveCellSize = this.gridConfig.cellSize * this.reduceFactor;
+    const width = this.gridConfig.width * effectiveCellSize;
+    const height = this.gridConfig.height * effectiveCellSize;
 
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
@@ -210,9 +215,10 @@ class AppliedPatternPreview {
       ctx.fillStyle = colorHex;
       
       // Draw cell
-      const x = col * this.gridConfig.cellSize;
-      const y = row * this.gridConfig.cellSize;
-      ctx.fillRect(x, y, this.gridConfig.cellSize, this.gridConfig.cellSize);
+      const effectiveCellSize = this.gridConfig.cellSize * this.reduceFactor;
+      const x = col * effectiveCellSize;
+      const y = row * effectiveCellSize;
+      ctx.fillRect(x, y, effectiveCellSize, effectiveCellSize);
     }
   }
   
@@ -229,8 +235,9 @@ class AppliedPatternPreview {
     if (!this.canvas || !this.ctx) return;
 
     const ctx = this.ctx;
-    const width = this.gridConfig.width * this.gridConfig.cellSize;
-    const height = this.gridConfig.height * this.gridConfig.cellSize;
+    const effectiveCellSize = this.gridConfig.cellSize * this.reduceFactor;
+    const width = this.gridConfig.width * effectiveCellSize;
+    const height = this.gridConfig.height * effectiveCellSize;
 
     // Clear canvas
     ctx.clearRect(0, 0, width, height);
@@ -260,9 +267,10 @@ class AppliedPatternPreview {
       ctx.fillStyle = colorHex;
       
       // Draw cell
-      const x = col * this.gridConfig.cellSize;
-      const y = row * this.gridConfig.cellSize;
-      ctx.fillRect(x, y, this.gridConfig.cellSize, this.gridConfig.cellSize);
+      const effectiveCellSize = this.gridConfig.cellSize * this.reduceFactor;
+      const x = col * effectiveCellSize;
+      const y = row * effectiveCellSize;
+      ctx.fillRect(x, y, effectiveCellSize, effectiveCellSize);
     }
   }
   

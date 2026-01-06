@@ -16,7 +16,8 @@ class AutoGallery {
     this.config = {
       initialBatchSize: config.initialBatchSize || 12,
       loadBatchSize: config.loadBatchSize || 8,
-      scrollThreshold: config.scrollThreshold || 200
+      scrollThreshold: config.scrollThreshold || 200,
+      minColumns: config.minColumns || 3
     };
     
     // State
@@ -155,8 +156,18 @@ class AutoGallery {
     // Try to calculate viewport-based batch size
     try {
       const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
       const estimatedTileHeight = 300; // Rough estimate
-      const tilesNeeded = Math.ceil((viewportHeight * 2) / estimatedTileHeight);
+      const estimatedTileWidth = 300; // Rough estimate
+      
+      // Calculate how many columns we'll have
+      const estimatedColumns = Math.max(this.config.minColumns, Math.floor(viewportWidth / estimatedTileWidth));
+      
+      // Calculate tiles needed: (viewport height * 2) / tile height * columns
+      // This accounts for multiple columns needing tiles
+      const tilesPerColumn = Math.ceil((viewportHeight * 2) / estimatedTileHeight);
+      const tilesNeeded = tilesPerColumn * estimatedColumns;
+      
       return Math.max(this.config.initialBatchSize, tilesNeeded);
     } catch (e) {
       // Fallback to fixed size
@@ -198,6 +209,12 @@ class AutoGallery {
     // Use provided startIndex or calculate from current pattern count
     const actualStartIndex = startIndex !== null ? startIndex : (this.generatedPatterns.length - patterns.length);
     
+    // Check if we're on a small screen (would use minColumns)
+    const containerWidth = grid.offsetWidth || window.innerWidth;
+    const estimatedTileWidth = 300; // Rough estimate
+    const wouldUseMinColumns = Math.floor(containerWidth / estimatedTileWidth) < this.config.minColumns;
+    const reduceFactor = wouldUseMinColumns ? 0.5 : 1;
+    
     patterns.forEach((pattern, patternIndex) => {
       const globalIndex = actualStartIndex + patternIndex;
       const containerId = `pattern-tile-${globalIndex}`;
@@ -213,7 +230,8 @@ class AutoGallery {
       
       // Create AppliedPatternPreview instance
       const preview = new AppliedPatternPreview(containerId, null, {
-        showControls: false
+        showControls: false,
+        reduceFactor: reduceFactor
       });
       
       // Configure pattern data
@@ -260,8 +278,8 @@ class AutoGallery {
     const firstTile = tiles[0];
     const baseTileWidth = firstTile.offsetWidth || firstTile.getBoundingClientRect().width || 250;
     
-    // Calculate number of columns that can fit (minimum 2 for mobile)
-    const numColumns = Math.max(2, Math.floor(containerWidth / baseTileWidth));
+    // Calculate number of columns that can fit
+    const numColumns = Math.max(this.config.minColumns, Math.floor(containerWidth / baseTileWidth));
     
     // Calculate actual tile width to fill container exactly (no gaps)
     const actualTileWidth = containerWidth / numColumns;
