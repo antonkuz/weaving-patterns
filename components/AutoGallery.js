@@ -330,17 +330,23 @@ class AutoGallery {
   }
   
   setupScrollListener(grid) {
+    let rafId = null;
     window.addEventListener('scroll', () => {
-      if (this.isLoading) return;
-      
-      const sentinelRect = this.sentinel.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Check if sentinel is near viewport bottom
-      if (sentinelRect.top < viewportHeight + this.config.scrollThreshold) {
-        this.loadMore(grid);
-      }
-    });
+      // Throttle using requestAnimationFrame for smoother scrolling
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (this.isLoading) return;
+        
+        const sentinelRect = this.sentinel.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        
+        // Check if sentinel is near viewport bottom
+        if (sentinelRect.top < viewportHeight + this.config.scrollThreshold) {
+          this.loadMore(grid);
+        }
+      });
+    }, { passive: true });
   }
   
   loadMore(grid) {
