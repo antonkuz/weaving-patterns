@@ -329,7 +329,10 @@ class AutoGallery {
     grid.appendChild(sentinel);
     this.updateSentinel(grid);
     
-    // Set up Intersection Observer
+    // Always set up scroll listener as primary/backup method
+    this.setupScrollListener(grid);
+    
+    // Also set up Intersection Observer if available (more efficient)
     if ('IntersectionObserver' in window) {
       this.observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !this.isLoading) {
@@ -340,10 +343,6 @@ class AutoGallery {
       });
       
       this.observer.observe(sentinel);
-    } else {
-      // Fallback to scroll listener
-      console.warn('IntersectionObserver not supported, using scroll listener');
-      this.setupScrollListener(grid);
     }
   }
   
