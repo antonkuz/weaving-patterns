@@ -77,19 +77,19 @@ const OPTIONS = {
   ],
   
   gridConfigs: [
-    { width: 25, height: 25, cellSize: 15 },
-    { width: 29, height: 15, cellSize: 15 },
-    { width: 28, height: 28, cellSize: 15 },
-    { width: 29, height: 16, cellSize: 20 },
-    { width: 20, height: 20, cellSize: 18 },
-    { width: 24, height: 24, cellSize: 16 },
-    { width: 18, height: 18, cellSize: 22 },
-    { width: 22, height: 22, cellSize: 17 },
-    { width: 19, height: 19, cellSize: 19 },
-    { width: 21, height: 21, cellSize: 18 },
-    { width: 17, height: 17, cellSize: 21 },
-    { width: 23, height: 23, cellSize: 16 },
-    { width: 26, height: 26, cellSize: 14 }
+    { width: 25, height: 23, cellSize: 18 },
+    { width: 27, height: 25, cellSize: 15 },
+    { width: 23, height: 21, cellSize: 18 },
+    { width: 29, height: 29, cellSize: 18 },
+    { width: 21, height: 19, cellSize: 19 },
+    { width: 25, height: 23, cellSize: 18 },
+    { width: 21, height: 19, cellSize: 18 },
+    { width: 23, height: 21, cellSize: 17 },
+    { width: 25, height: 23, cellSize: 18 },
+    { width: 22, height: 20, cellSize: 18 },
+    { width: 22, height: 20, cellSize: 18 },
+    { width: 27, height: 25, cellSize: 15 },
+    { width: 25, height: 23, cellSize: 18 }
   ],
   
   animations: [
